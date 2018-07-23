@@ -7,7 +7,6 @@
  eval $(minishift oc-env)
  oc login -u developer -p developer # or oc login -u system:admin 
  oc project eap-transactions
- minishift docker-env
  eval $(minishift docker-env)
  minishift addon apply registry-route
  #docker pull brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888/jboss-eap-7/eap71
@@ -42,3 +41,6 @@ oc set env dc/tx-server DEBUG=true # Enable the debug port
 oc get pods
 oc port-forward tx-client-3-jqn4x 8787:8787 & 
 oc port-forward tx-server-4-rrr2l 8788:8788 &
+
+# rebuild
+oc start-build tx-server -n eap-transactions

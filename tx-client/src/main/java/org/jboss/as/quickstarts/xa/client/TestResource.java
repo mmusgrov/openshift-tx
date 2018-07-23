@@ -31,4 +31,11 @@ public class TestResource {
     public String testSameTransactionEachCall(@Context SecurityContext context, @PathParam("arg") String arg) {
         return localBean.testSameTransactionEachCall();
     }
+
+    @GET
+    @Path("fault/{arg}")
+    @Produces("text/plain")
+    public String injectFault(@Context SecurityContext context, @PathParam("arg") String arg) {
+        return localBean.injectFault(arg);
+    }
 }

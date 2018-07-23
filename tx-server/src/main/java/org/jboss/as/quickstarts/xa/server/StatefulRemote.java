@@ -41,5 +41,7 @@ public interface StatefulRemote {
     void rollbackOnly() throws RemoteException;
 
     void setRollbackOnlyBeforeCompletion(boolean rollbackOnlyInBeforeCompletion) throws RemoteException;
+
+    String injectFault(String faultType);
 }
 

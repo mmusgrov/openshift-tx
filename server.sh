@@ -11,6 +11,8 @@ oc new-app jboss-eap-64~https://github.com/mmusgrov/openshift-tx.git#eap64 --con
 # edit the dc and service yaml to add port 4447 to the ports section of the container specification:
 # oc edit dc/tx-server && oc edit svc/tx-server
 # oc expose service tx-server && oc rollout latest tx-server
+# oc expose svc/tx-server && oc rollout latest tx-server
+
 
 # oc build-logs tx-client-1
 # oc rsh `oc get pods -n tx-client | grep Running | awk '{print $1}'`
