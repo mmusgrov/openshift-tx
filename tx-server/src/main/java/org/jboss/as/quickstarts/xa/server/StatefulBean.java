@@ -73,15 +73,17 @@ public class StatefulBean implements SessionSynchronization, StatefulRemote {
     }
 
     @TransactionAttribute(TransactionAttributeType.MANDATORY)
-    public void sameTransaction(boolean first) throws RemoteException {
+    public String sameTransaction(boolean first) throws RemoteException {
         System.out.printf("StatefulBean:sameTransaction%n");
         if (first) {
             transactionKey = transactionSynchronizationRegistry.getTransactionKey();
-        } else {
-            if (!transactionKey.equals(transactionSynchronizationRegistry.getTransactionKey())) {
-                throw new RemoteException("Transaction on second call was not the same as on first call");
-            }
+
+            return "StatefulBean:sameTransaction: transactionKey = " + transactionKey;
+        } else if (!transactionKey.equals(transactionSynchronizationRegistry.getTransactionKey())) {
+            throw new RemoteException("Transaction on second call was not the same as on first call");
         }
+
+        return "StatefulBean:sameTransaction: transactionKey is the same: " + transactionKey;
     }
 
     @TransactionAttribute(TransactionAttributeType.MANDATORY)

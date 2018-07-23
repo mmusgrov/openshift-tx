@@ -35,3 +35,10 @@ oc build-logs tx-client-1
 # oc login -u system:admin 
 oc rsh `oc get pods -n tx-client | grep Running | awk '{print $1}'
 CLI reference: https://docs.openshift.com/enterprise/3.0/cli_reference/basic_cli_operations.html
+
+# debug apps: https://blog.openshift.com/debugging-java-applications-on-openshift-kubernetes/
+oc expose service tx-server
+oc set env dc/tx-server DEBUG=true # Enable the debug port
+oc get pods
+oc port-forward tx-client-3-jqn4x 8787:8787 & 
+oc port-forward tx-server-4-rrr2l 8788:8788 &

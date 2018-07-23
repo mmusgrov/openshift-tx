@@ -36,7 +36,7 @@ public interface StatefulRemote {
 
     void resetStatus() throws RemoteException;
 
-    void sameTransaction(boolean first) throws RemoteException;
+    String sameTransaction(boolean first) throws RemoteException;
 
     void rollbackOnly() throws RemoteException;
 

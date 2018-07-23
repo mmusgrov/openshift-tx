@@ -70,8 +70,10 @@ public class TransactionalLocalBean implements TransactionalLocal {
 
             userTransaction.begin();
             try {
-                bean.sameTransaction(true);
-                bean.sameTransaction(false);
+                String k1 = bean.sameTransaction(true);
+                System.out.printf("client first key = %s%n", k1);
+                String k2 = bean.sameTransaction(false);
+                System.out.printf("client second key = %s%n", k2);
             } finally {
                 userTransaction.rollback();
                 message = "success";
